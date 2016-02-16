@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <title>Graphic Editor</title>
+</head>
+<body>
+    <!-- COLLAPSABLE MENU BOOTSTRAP -->
+    <nav class="navbar-wrapper navbar-default navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">                
+                <div class="container" style="padding-top: 20px; padding-bottom : 10px">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-6  col-md-6 text-center">
+                            <h3>    Add</h3>
+                            <a id="button1" href="#" class="btn btn-success btn-md">
+                                <span class="glyphicon glyphicon-record"></span> Circle
+                            </a>
+                            <a id="button2" href="#" class="btn btn-success btn-md">
+                                <span class="glyphicon glyphicon-unchecked"></span> Rectangle
+                            </a>
+                            <a id="button3" href="#" class="btn btn-success btn-md">
+                                <span class="glyphicon  glyphicon-triangle-top"></span> Triangle
+                            </a>
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-6 text-center" style="border-left: solid">
+                            <h3>Edit</h3>
+                            
+                            <a id="buttonDelete" href="#" class="btn btn-danger btn-md">
+                                <span class="glyphicon glyphicon-remove-sign"></span> Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse">
+            </div><!-- /.navbar-collapse -->
+        </div>
+    </nav>
+    <!-- END OF: COLLAPSABLE MENU BOOTSTRAP -->
+    <!-- INFORMATION SECTION -->
+
+
+    <div class="container" style="margin-top: 250px; margin-bottom: 10% ">
+        <div class="row text-center">
+            <div class="col-sm-offset-3 col-sm-6 col-md-offset-3 col-md-6 text-center" style="background-color:white">
+                <canvas id="c1" width="600" height="400" style="border: solid;"></canvas>
+            </div>
+        </div>
+    </div>
+    <!-- END OF INFORMATION SECTION --> 
+    <!-- FOOTER SECTION -->
+    <footer style="background-color:black; padding: 10px">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-4">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href="#">About Us</a></li>
+                        <li><a href="#">Support 24x7</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- END OF FOOTER SECTION -->
+    
+    
+   
+
+    <!--JAVASCRIPT IS BEING LOADED AT THE END OF THE BODY FOR LOAD OPTIMIZATION
+    AND IMPROVE USER EXPERIENCE IN CASE OF SLOW CONNECTIONS-->
+    <!-- JAVASCRIPT -->
+    <!-- Get version 1.1.0 of Fabric.js from CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.1.0/fabric.all.min.js"></script>
+    <!-- Get the highest 1.X version of jQuery from CDN. Required for ready() function. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("ready!");
+            //SELECT THE CANVAS TO USE IT ON EACH CLICK EVENT
+            //OF THE BUTTONS
+            window.canvas = new fabric.Canvas('c1');
+
+            $('#button1').click(function () {
+                var circle = new fabric.Circle({
+                    radius: 20,
+                    fill: 'rgb(' + random_num(255) + ',' + random_num(255) + ',' + random_num(255) + ')',
+                    left: 250,
+                    top: 50
+                })
+                window.canvas.getObjects();
+                window.canvas.add(circle);
+                window.canvas.selection = false;
+                window.canvas.renderAll();
+                window.canvas.calcOffset();
+
+            });
+
+            $('#button2').click(function () {
+                var rect = new fabric.Rect({
+                    width: 70,
+                    height: 50,
+                    left: 50,
+                    top: 50,
+                    fill: 'rgb(' + random_num(255) + ',' + random_num(255) + ',' + random_num(255) + ')'
+                })
+                window.canvas.getObjects();
+                window.canvas.add(rect);
+                window.canvas.selection = true;
+                window.canvas.renderAll();
+                window.canvas.calcOffset();
+
+            });
+
+            $('#button3').click(function () {
+                var trian = new fabric.Triangle({
+                    width: 50,
+                    height: 50,
+                    left: 150,
+                    top: 50,
+                    fill: 'rgb(' + random_num(255) + ',' + random_num(255) + ',' + random_num(255) + ')'
+                })
+               
+                window.canvas.getObjects();
+                window.canvas.add(trian);
+                window.canvas.selection = true;
+                window.canvas.renderAll();
+                window.canvas.calcOffset();
+
+            });
+
+
+            $('#buttonDelete').click(function () {
+                window.canvas.getActiveObject().remove();
+            });
+
+                function random_num($value) {
+
+        $result = Math.floor(Math.random() * $value);
+
+        return $result;
+
+    }
+        });
+    </script>
+
+</body>
+</html>
